@@ -27,7 +27,7 @@ window.STORE = {
   phone: "(555) 123-4567",
   email: "catering@cafecartel.club",
   whatsapp: "",            // digits only with country code, e.g. "15551234567"
-  address: "123 Main Street, Your City, ST 00000",
+  address: "1100 Adams St, Hoboken, NJ 07030",
 
   // Opening hours, shown in this order
   hours: [
