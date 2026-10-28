@@ -11,10 +11,15 @@ window.STORE = {
     "Tell your story here: when Cafe Cartel opened, where the beans come from, " +
     "and what makes it the neighborhood's favorite spot.",
 
-  // Online ordering: paste your Toast online ordering link here, for example
-  // "https://order.toasttab.com/online/cafe-cartel". The Order buttons appear once it's filled in.
+  // Online ordering.
+  // The site's own cart sends each order to the email (and text number, if set) below.
+  // Customers pay at pickup or on delivery.
+  orderEmail: "catering@cafecartel.club",
+  orderTextNumber: "",     // café cell for text-message orders, digits only, e.g. "12015551234"
+  orderNote: "Pickup or delivery · Pay when you get your order",
+  // If you later turn on Toast Online Ordering, paste its link here and the Order
+  // buttons will go to Toast instead of the site's cart.
   orderUrl: "",
-  orderNote: "Pickup or delivery · Pay online",   // short line shown under the Order button
 
   // Delivery zones shown in the "Pickup & Delivery" section.
   // (Set the same fees and minimums in Toast so checkout matches.)

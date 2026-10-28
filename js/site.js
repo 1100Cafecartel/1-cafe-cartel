@@ -68,17 +68,18 @@
     options.appendChild(box);
   });
 
-  // Order buttons link to the online ordering page (Toast) once orderUrl is set
+  // With a Toast link, Order buttons go to Toast; otherwise js/order.js runs the site's own cart
   if (s.orderUrl) {
     document.querySelectorAll(".order-link").forEach(function (link) {
       link.href = s.orderUrl;
-      link.hidden = false;
+      link.target = "_blank";
+      link.rel = "noopener";
     });
     grid.querySelectorAll(".card-body").forEach(function (body) {
       body.appendChild(el("a", { class: "card-order", href: s.orderUrl, target: "_blank", rel: "noopener" }, "Order →"));
     });
-    if (s.orderNote) document.querySelector(".order-note").hidden = false;
   }
+  if (!s.orderNote) document.querySelector(".order-note").hidden = true;
 
   var hours = document.getElementById("hours");
   (s.hours || []).forEach(function (h) {
@@ -117,6 +118,7 @@
     }
     return null;
   }
+  window.CafeHours = { today: todaysHours };
   var status = document.getElementById("status");
   var now = new Date();
   var today = todaysHours(now);
