@@ -20,7 +20,7 @@ Open `index.html` in a browser. No server is needed.
 
 The `CNAME` file in this repo already contains the domain `cafecartel.club`.
 
-1. On GitHub, open the repo, go to **Settings → Pages**. Under **Build and deployment**, choose **Deploy from a branch**, then select `main` and `/ (root)`, and click **Save**.
+1. On GitHub, open the repo, go to **Settings → Pages**. Under **Build and deployment → Source**, choose **GitHub Actions**. The included workflow (`.github/workflows/pages.yml`) publishes the site on every push to `main`; to re-run it, go to the **Actions** tab → **Deploy website** → **Run workflow**.
 2. Under **Custom domain**, make sure `cafecartel.club` is entered, and click **Save**.
 3. In Namecheap, go to **Domain List → cafecartel.club → Manage → Advanced DNS**. Delete any existing "URL Redirect" or parking records for `@` and `www`, then add:
 
