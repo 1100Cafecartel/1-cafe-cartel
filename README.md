@@ -37,8 +37,8 @@ The `CNAME` file in this repo already contains the domain `cafecartel.club`.
 ## Managing it from another computer
 
 ```bash
-git clone https://github.com/<owner>/<repo>.git
-cd <repo>
+git clone https://github.com/1100Cafecartel/1-cafe-cartel.git
+cd 1-cafe-cartel
 # edit content.js, add photos to images/ ...
 git add -A
 git commit -m "Update menu"
