@@ -31,11 +31,14 @@ window.STORE = {
     tiktok: "",
   },
 
-  // Menu items. Put photos in the images/ folder.
+  // Menu items. "category" creates the tabs above the menu (Coffee, Food, ...).
+  // Put photos in the images/ folder.
   products: [
-    { name: "Espresso",      price: "$3.00", description: "Rich, bold double shot.",                 image: "images/placeholder.svg" },
-    { name: "Cappuccino",    price: "$4.50", description: "Espresso with steamed milk and foam.",   image: "images/placeholder.svg" },
-    { name: "Iced Latte",    price: "$5.00", description: "Smooth espresso over ice with milk.",    image: "images/placeholder.svg" },
-    { name: "Croissant",     price: "$3.50", description: "Buttery and baked fresh every morning.", image: "images/placeholder.svg" },
+    { category: "Coffee", name: "Espresso",        price: "$3.00", description: "Rich, bold double shot.",                 image: "images/placeholder.svg" },
+    { category: "Coffee", name: "Cappuccino",      price: "$4.50", description: "Espresso with steamed milk and foam.",   image: "images/placeholder.svg" },
+    { category: "Coffee", name: "Iced Latte",      price: "$5.00", description: "Smooth espresso over ice with milk.",    image: "images/placeholder.svg" },
+    { category: "Food",   name: "Croissant",       price: "$3.50", description: "Buttery and baked fresh every morning.", image: "images/placeholder.svg" },
+    { category: "Food",   name: "Breakfast Sandwich", price: "$7.50", description: "Egg, cheese and your choice of meat.", image: "images/placeholder.svg" },
+    { category: "Sweets", name: "Chocolate Chip Cookie", price: "$2.50", description: "Warm, gooey and huge.",            image: "images/placeholder.svg" },
   ],
 };

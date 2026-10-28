@@ -44,7 +44,8 @@ h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
 .nav-toggle { display: none; background: none; border: 0; font-size: 1.6rem; cursor: pointer; color: var(--text); }
 
 /* Hero */
-.hero { background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%); color: #fff; padding: 110px 0 100px; text-align: center; }
+.hero { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%); color: #fff; padding: 110px 0 100px; text-align: center; }
+.hero .container { position: relative; }
 .hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
 .tagline { font-size: 1.2rem; opacity: .9; max-width: 600px; margin: 0 auto 32px; }
 .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -82,6 +83,55 @@ h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
 .social a { color: #fff; }
 
 /* Phones */
+/* Interactive touches */
+.site-header { transition: box-shadow .25s; }
+.site-header.scrolled { box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+.nav a:not(.btn) { position: relative; }
+.nav a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--brand);
+                          transform: scaleX(0); transition: transform .25s; }
+.nav a:not(.btn):hover::after, .nav a.active::after { transform: scaleX(1); }
+.nav a.active { color: var(--brand); }
+
+.hero-bg span { position: absolute; border-radius: 50%; filter: blur(40px); opacity: .35; animation: float 14s ease-in-out infinite; }
+.hero-bg span:nth-child(1) { width: 340px; height: 340px; background: var(--accent); top: -80px; left: -60px; }
+.hero-bg span:nth-child(2) { width: 260px; height: 260px; background: #b9784c; bottom: -90px; right: 8%; animation-delay: -5s; }
+.hero-bg span:nth-child(3) { width: 180px; height: 180px; background: #f3dcc0; top: 30%; right: 25%; animation-delay: -9s; }
+@keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(30px, -25px) scale(1.12); } }
+.hero h1, .hero .tagline, .hero-actions, .status { animation: rise .8s both; }
+.hero .tagline { animation-delay: .12s; }
+.hero-actions { animation-delay: .24s; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: .85rem; font-weight: 600; padding: 6px 14px;
+          border-radius: 999px; background: rgba(255,255,255,.15); margin-bottom: 18px; }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #e5736a; }
+.status.is-open::before { background: #6ee7a0; box-shadow: 0 0 0 0 rgba(110,231,160,.7); animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(110,231,160,0); } 100% { box-shadow: 0 0 0 0 rgba(110,231,160,0); } }
+
+.btn { transition: background .2s, transform .15s, box-shadow .2s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.15); }
+.btn:active { transform: translateY(0); }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 24px; }
+.tab { font: inherit; font-weight: 600; padding: 8px 18px; border-radius: 999px; border: 2px solid var(--brand);
+       background: transparent; color: var(--brand); cursor: pointer; transition: background .2s, color .2s; }
+.tab:hover { background: var(--bg-alt); }
+.tab[aria-selected="true"] { background: var(--brand); color: #fff; }
+
+.card img { transition: transform .4s; }
+.card:hover img { transform: scale(1.05); }
+.card.pop { animation: rise .35s both; }
+
+.js-reveal .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.js-reveal .reveal.visible { opacity: 1; transform: none; }
+.js-reveal .card.reveal { transition: opacity .6s ease, transform .6s ease, box-shadow .2s; }
+.js-reveal .card.visible:hover { transform: translateY(-3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js-reveal .reveal { opacity: 1; transform: none; }
+}
+
 @media (max-width: 760px) {
   .nav-toggle { display: block; }
   .nav { display: none; position: absolute; top: 64px; left: 0; right: 0; background: #fff; flex-direction: column;
