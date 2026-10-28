@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Store Name</title>
+  <meta name="description" content="Visit our store: products, opening hours, location and contact details.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="logo" data-field="name">Your Store Name</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav">
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#visit">Visit</a>
+        <a href="#contact" class="btn btn-small">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <h1 data-field="name">Your Store Name</h1>
+        <p class="tagline" data-field="tagline"></p>
+        <div class="hero-actions">
+          <a href="#products" class="btn">See our products</a>
+          <a href="#visit" class="btn btn-outline">Find us</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="section">
+      <div class="container">
+        <h2>Our Products</h2>
+        <div class="grid" id="product-grid"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section section-alt">
+      <div class="container narrow">
+        <h2>About Us</h2>
+        <p data-field="about"></p>
+      </div>
+    </section>
+
+    <section id="visit" class="section">
+      <div class="container two-col">
+        <div>
+          <h2>Visit Us</h2>
+          <p class="address" data-field="address"></p>
+          <h3>Opening Hours</h3>
+          <table class="hours" id="hours"></table>
+        </div>
+        <div class="map-wrap">
+          <iframe id="map" title="Store location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-alt">
+      <div class="container narrow center">
+        <h2>Get in Touch</h2>
+        <p>Questions about a product? Call, email or message us.</p>
+        <div class="contact-links" id="contact-links"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> <span data-field="name"></span></p>
+      <div class="social" id="social"></div>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>
