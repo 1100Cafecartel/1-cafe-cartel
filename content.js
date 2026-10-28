@@ -13,7 +13,7 @@ window.STORE = {
 
   // Contact details (leave "" to hide a line)
   phone: "(555) 123-4567",
-  email: "hello@cafecartel.club",
+  email: "catering@cafecartel.club",
   whatsapp: "",            // digits only with country code, e.g. "15551234567"
   address: "123 Main Street, Your City, ST 00000",
 
