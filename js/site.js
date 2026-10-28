@@ -58,6 +58,28 @@
     tabs.remove();
   }
 
+  // Delivery zone cards next to the Pickup card
+  var options = document.getElementById("order-options");
+  (s.delivery || []).forEach(function (d) {
+    var box = el("div", { class: "option" });
+    box.appendChild(el("h3", {}, "Delivery · " + d.area));
+    box.appendChild(el("p", { class: "big" }, d.fee + " fee"));
+    box.appendChild(el("p", {}, d.minimum + " minimum order, plus the delivery fee."));
+    options.appendChild(box);
+  });
+
+  // Order buttons link to the online ordering page (Toast) once orderUrl is set
+  if (s.orderUrl) {
+    document.querySelectorAll(".order-link").forEach(function (link) {
+      link.href = s.orderUrl;
+      link.hidden = false;
+    });
+    grid.querySelectorAll(".card-body").forEach(function (body) {
+      body.appendChild(el("a", { class: "card-order", href: s.orderUrl, target: "_blank", rel: "noopener" }, "Order →"));
+    });
+    if (s.orderNote) document.querySelector(".order-note").hidden = false;
+  }
+
   var hours = document.getElementById("hours");
   (s.hours || []).forEach(function (h) {
     var tr = el("tr");

@@ -11,6 +11,18 @@ window.STORE = {
     "Tell your story here: when Cafe Cartel opened, where the beans come from, " +
     "and what makes it the neighborhood's favorite spot.",
 
+  // Online ordering: paste your Toast online ordering link here, for example
+  // "https://order.toasttab.com/online/cafe-cartel". The Order buttons appear once it's filled in.
+  orderUrl: "",
+  orderNote: "Pickup or delivery · Pay online",   // short line shown under the Order button
+
+  // Delivery zones shown in the "Pickup & Delivery" section.
+  // (Set the same fees and minimums in Toast so checkout matches.)
+  delivery: [
+    { area: "In town",     minimum: "$10", fee: "$5" },
+    { area: "Out of town", minimum: "$15", fee: "$5" },
+  ],
+
   // Contact details (leave "" to hide a line)
   phone: "(555) 123-4567",
   email: "catering@cafecartel.club",

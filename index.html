@@ -15,9 +15,11 @@
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
       <nav class="nav">
         <a href="#menu">Menu</a>
+        <a href="#order">Delivery</a>
         <a href="#about">About</a>
         <a href="#visit">Visit</a>
-        <a href="#contact" class="btn btn-small">Contact</a>
+        <a href="#contact">Contact</a>
+        <a class="btn btn-small order-link" target="_blank" rel="noopener" hidden>Order now</a>
       </nav>
     </div>
   </header>
@@ -30,9 +32,11 @@
         <h1 data-field="name">Cafe Cartel</h1>
         <p class="tagline" data-field="tagline"></p>
         <div class="hero-actions">
-          <a href="#menu" class="btn">See the menu</a>
+          <a class="btn order-link" target="_blank" rel="noopener" hidden>Order pickup or delivery</a>
+          <a href="#menu" class="btn btn-outline">See the menu</a>
           <a href="#visit" class="btn btn-outline">Find us</a>
         </div>
+        <p class="order-note" data-field="orderNote" hidden></p>
       </div>
     </section>
 
@@ -41,17 +45,35 @@
         <h2 class="reveal">Our Menu</h2>
         <div class="tabs" id="menu-tabs" role="tablist" aria-label="Menu categories"></div>
         <div class="grid" id="product-grid"></div>
+        <div class="menu-cta center">
+          <a class="btn order-link" target="_blank" rel="noopener" hidden>Order pickup or delivery</a>
+        </div>
       </div>
     </section>
 
-    <section id="about" class="section section-alt">
+    <section id="order" class="section section-alt">
+      <div class="container reveal">
+        <h2 class="center">Pickup &amp; Delivery</h2>
+        <p class="center lead">Order ahead and skip the line, or let us bring it to you.</p>
+        <div class="options" id="order-options">
+          <div class="option">
+            <h3>Pickup</h3>
+            <p class="big">Free</p>
+            <p>Order online and grab it at the counter. No minimum.</p>
+          </div>
+        </div>
+        <div class="center"><a class="btn order-link" target="_blank" rel="noopener" hidden>Start your order</a></div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
       <div class="container narrow reveal">
         <h2>About Us</h2>
         <p data-field="about"></p>
       </div>
     </section>
 
-    <section id="visit" class="section">
+    <section id="visit" class="section section-alt">
       <div class="container two-col reveal">
         <div>
           <h2>Visit Us</h2>
@@ -65,7 +87,7 @@
       </div>
     </section>
 
-    <section id="contact" class="section section-alt">
+    <section id="contact" class="section">
       <div class="container narrow center reveal">
         <h2>Get in Touch</h2>
         <p>Questions, catering or large orders? Call, email or message us.</p>

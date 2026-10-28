@@ -12,6 +12,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body { margin: 0; font-family: var(--font); color: var(--text); background: var(--bg); line-height: 1.6; }
 img { max-width: 100%; display: block; }
@@ -83,6 +84,22 @@ h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
 .social a { color: #fff; }
 
 /* Phones */
+/* Ordering */
+.order-note { margin: 16px 0 0; font-size: .9rem; opacity: .85; }
+.menu-cta { margin-top: 32px; }
+.card-order { display: inline-block; margin-top: 12px; font-weight: 700; text-decoration: none; }
+.card-order:hover { text-decoration: underline; }
+.nav .order-link { color: var(--text); background: var(--accent); border-color: var(--accent); }
+
+.lead { color: var(--muted); margin-top: -8px; }
+.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 32px 0; }
+.option { background: #fff; border: 1px solid #eadfd4; border-radius: var(--radius); padding: 24px; text-align: center;
+          transition: transform .2s, box-shadow .2s; }
+.option:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+.option h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 8px; }
+.option .big { font-size: 1.8rem; font-weight: 800; color: var(--brand); margin: 0 0 8px; }
+.option p { margin: 0; }
+
 /* Interactive touches */
 .site-header { transition: box-shadow .25s; }
 .site-header.scrolled { box-shadow: 0 6px 20px rgba(0,0,0,.08); }
