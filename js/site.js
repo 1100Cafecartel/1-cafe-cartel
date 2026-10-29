@@ -1,62 +1,60 @@
 // Fills the page from content.js. You normally don't need to edit this file.
 (function () {
   var s = window.STORE || {};
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function el(tag, attrs, text) {
     var e = document.createElement(tag);
     for (var k in attrs || {}) e.setAttribute(k, attrs[k]);
-    if (text) e.textContent = text;
+    if (text != null) e.textContent = text;
     return e;
   }
+  function money(n) { return n.toFixed(2); }
 
-  document.title = s.name || document.title;
   document.querySelectorAll("[data-field]").forEach(function (node) {
     var v = s[node.getAttribute("data-field")];
     if (v) node.textContent = v;
+    else if (node.classList.contains("order-note")) node.hidden = true;
   });
 
-  // Menu cards, with category tabs when items have a "category"
-  var grid = document.getElementById("product-grid");
-  var products = s.products || [];
-  products.forEach(function (p) {
-    var card = el("article", { class: "card reveal", "data-category": p.category || "" });
-    card.appendChild(el("img", { src: p.image || "images/placeholder.svg", alt: p.name, loading: "lazy" }));
-    var body = el("div", { class: "card-body" });
-    var head = el("div", { class: "card-head" });
-    head.appendChild(el("h3", {}, p.name));
-    if (p.price) head.appendChild(el("span", { class: "price" }, p.price));
-    body.appendChild(head);
-    if (p.description) body.appendChild(el("p", {}, p.description));
-    card.appendChild(body);
-    grid.appendChild(card);
-  });
-
+  // Menu: one block per section, one row per item
+  var list = document.getElementById("menu-list");
   var tabs = document.getElementById("menu-tabs");
-  var categories = [];
-  products.forEach(function (p) {
-    if (p.category && categories.indexOf(p.category) < 0) categories.push(p.category);
-  });
-  if (categories.length > 1) {
-    ["All"].concat(categories).forEach(function (c, i) {
-      var b = el("button", { class: "tab", type: "button", role: "tab", "aria-selected": i === 0 ? "true" : "false" }, c);
-      b.addEventListener("click", function () {
-        tabs.querySelectorAll(".tab").forEach(function (t) { t.setAttribute("aria-selected", t === b ? "true" : "false"); });
-        grid.querySelectorAll(".card").forEach(function (card) {
-          var show = c === "All" || card.getAttribute("data-category") === c;
-          card.hidden = !show;
-          if (show && !reduceMotion) {
-            card.classList.remove("pop");
-            void card.offsetWidth;
-            card.classList.add("pop");
-          }
-        });
-      });
-      tabs.appendChild(b);
+  (s.menu || []).forEach(function (sec, si) {
+    var id = "menu-" + sec.section.toLowerCase().replace(/[^a-z]+/g, "-");
+    var block = el("section", { class: "menu-section reveal" + (sec.highlight ? " highlight" : ""), id: id });
+    var head = el("div", { class: "menu-head" });
+    head.appendChild(el("h3", {}, sec.section));
+    if (sec.note) head.appendChild(el("p", { class: "menu-note" }, sec.note));
+    block.appendChild(head);
+
+    var ul = el("ul", { class: "menu-items" });
+    sec.items.forEach(function (item, ii) {
+      var li = el("li", { class: "menu-item" });
+      if (item.image) li.appendChild(el("img", { src: item.image, alt: "", loading: "lazy", class: "menu-thumb" }));
+      var info = el("div", { class: "menu-info" });
+      info.appendChild(el("span", { class: "menu-name" }, item.name));
+      var sub = item.desc || (item.choices ? item.choices.join(" · ") : "");
+      if (sub) info.appendChild(el("span", { class: "menu-desc" }, sub));
+      li.appendChild(info);
+
+      var price = el("span", { class: "menu-price" });
+      if (item.sizes) {
+        var names = Object.keys(item.sizes);
+        price.textContent = names.slice(0, 2).map(function (n) { return money(item.sizes[n]); }).join(" / ");
+        price.title = names.map(function (n) { return n + " " + money(item.sizes[n]); }).join(" · ");
+        if (names.length > 2) info.appendChild(el("span", { class: "menu-desc" }, names.slice(2).map(function (n) { return n + " " + money(item.sizes[n]); }).join(" · ")));
+      } else {
+        price.textContent = money(item.price || 0);
+      }
+      li.appendChild(price);
+      li.appendChild(el("button", { class: "add-btn", type: "button", "data-section": si, "data-item": ii, "aria-label": "Add " + item.name }, "+"));
+      ul.appendChild(li);
     });
-  } else {
-    tabs.remove();
-  }
+    block.appendChild(ul);
+    list.appendChild(block);
+
+    tabs.appendChild(el("a", { class: "tab", href: "#" + id }, sec.section));
+  });
 
   // Delivery zone cards next to the Pickup card
   var options = document.getElementById("order-options");
@@ -75,11 +73,8 @@
       link.target = "_blank";
       link.rel = "noopener";
     });
-    grid.querySelectorAll(".card-body").forEach(function (body) {
-      body.appendChild(el("a", { class: "card-order", href: s.orderUrl, target: "_blank", rel: "noopener" }, "Order →"));
-    });
+    document.querySelectorAll(".add-btn").forEach(function (b) { b.remove(); });
   }
-  if (!s.orderNote) document.querySelector(".order-note").hidden = true;
 
   var hours = document.getElementById("hours");
   (s.hours || []).forEach(function (h) {
@@ -132,13 +127,16 @@
 
   if (s.address) {
     document.getElementById("map").src =
-      "https://www.google.com/maps?output=embed&q=" + encodeURIComponent(s.address);
+      "https://www.google.com/maps?output=embed&q=" + encodeURIComponent(s.name + ", " + s.address);
   }
 
-  var links = document.getElementById("contact-links");
-  if (s.phone) links.appendChild(el("a", { class: "btn", href: "tel:" + s.phone.replace(/[^\d+]/g, "") }, "Call " + s.phone));
-  if (s.whatsapp) links.appendChild(el("a", { class: "btn", href: "https://wa.me/" + s.whatsapp, target: "_blank", rel: "noopener" }, "WhatsApp"));
-  if (s.email) links.appendChild(el("a", { class: "btn btn-outline", href: "mailto:" + s.email }, s.email));
+  function contactLinks(box, labelEmail) {
+    if (s.phone) box.appendChild(el("a", { class: "btn", href: "tel:" + s.phone.replace(/[^\d+]/g, "") }, "Call " + s.phone));
+    if (s.whatsapp) box.appendChild(el("a", { class: "btn", href: "https://wa.me/" + s.whatsapp, target: "_blank", rel: "noopener" }, "WhatsApp"));
+    if (s.email) box.appendChild(el("a", { class: "btn btn-outline", href: "mailto:" + s.email + (labelEmail ? "?subject=" + encodeURIComponent("Catering inquiry") : "") }, s.email));
+  }
+  contactLinks(document.getElementById("contact-links"));
+  contactLinks(document.getElementById("catering-links"), true);
 
   var social = document.getElementById("social");
   var names = { instagram: "Instagram", facebook: "Facebook", tiktok: "TikTok" };
@@ -166,7 +164,7 @@
 
   if (!("IntersectionObserver" in window)) return;
 
-  // Fade sections and cards in as they scroll into view
+  // Fade sections in as they scroll into view
   var revealer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -174,21 +172,26 @@
         revealer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
-  document.querySelectorAll(".reveal").forEach(function (node, i) {
-    node.style.transitionDelay = node.classList.contains("card") ? (i % 4) * 80 + "ms" : "0ms";
-    revealer.observe(node);
-  });
+  }, { threshold: 0.08 });
+  document.querySelectorAll(".reveal").forEach(function (node) { revealer.observe(node); });
   document.documentElement.classList.add("js-reveal");
 
-  // Highlight the menu link for the section on screen
-  var navLinks = {};
-  nav.querySelectorAll('a[href^="#"]').forEach(function (a) { navLinks[a.getAttribute("href").slice(1)] = a; });
-  var spy = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      var link = navLinks[entry.target.id];
-      if (link) link.classList.toggle("active", entry.isIntersecting);
-    });
-  }, { rootMargin: "-45% 0px -50% 0px" });
-  document.querySelectorAll("main section[id]").forEach(function (sec) { spy.observe(sec); });
+  // Highlight the nav link and menu tab for what's on screen
+  function spy(links, targets, margin) {
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var link = map[entry.target.id];
+        if (!link) return;
+        link.classList.toggle("active", entry.isIntersecting);
+        if (entry.isIntersecting && link.classList.contains("tab")) {
+          tabs.scrollTo({ left: link.offsetLeft - 16, behavior: "smooth" });
+        }
+      });
+    }, { rootMargin: margin });
+    targets.forEach(function (t) { io.observe(t); });
+  }
+  spy(nav.querySelectorAll('a[href^="#"]:not(.btn)'), document.querySelectorAll("main > section[id]"), "-45% 0px -50% 0px");
+  spy(tabs.querySelectorAll(".tab"), document.querySelectorAll(".menu-section"), "-30% 0px -65% 0px");
 })();

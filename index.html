@@ -3,22 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cafe Cartel</title>
-  <meta name="description" content="Cafe Cartel: coffee, menu, opening hours and location.">
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <title>Cafe Cartel · Colombian Coffee in Hoboken</title>
+  <meta name="description" content="Cafe Cartel: Colombian coffee, bakery and kitchen in Hoboken, NJ. Order online for pickup or delivery.">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="flag-stripe" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#top" class="logo" data-field="name">Cafe Cartel</a>
+      <a href="#top" class="logo"><img src="images/logo.webp" alt="Cafe Cartel Hoboken" width="640" height="524"></a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
       <nav class="nav">
         <a href="#menu">Menu</a>
         <a href="#order">Delivery</a>
         <a href="#about">About</a>
         <a href="#visit">Visit</a>
-        <a href="#contact">Contact</a>
         <a href="#menu" class="btn btn-small order-link">Order now</a>
       </nav>
     </div>
@@ -26,32 +29,46 @@
 
   <main id="top">
     <section class="hero">
-      <div class="hero-bg" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="container">
-        <span class="status" id="status" hidden></span>
-        <h1 data-field="name">Cafe Cartel</h1>
-        <p class="tagline" data-field="tagline"></p>
-        <div class="hero-actions">
-          <a href="#menu" class="btn order-link">Order pickup or delivery</a>
-          <a href="#menu" class="btn btn-outline">See the menu</a>
-          <a href="#visit" class="btn btn-outline">Find us</a>
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="status" id="status" hidden></span>
+          <p class="kicker" data-field="kicker"></p>
+          <h1>Coffee with a <span class="red">reputation.</span></h1>
+          <p class="tagline" data-field="tagline"></p>
+          <div class="hero-actions">
+            <a href="#menu" class="btn order-link">Order pickup or delivery</a>
+            <a href="#menu" class="btn btn-ghost">See the menu</a>
+          </div>
+          <p class="order-note" data-field="orderNote"></p>
         </div>
-        <p class="order-note" data-field="orderNote"></p>
+        <div class="hero-art" aria-hidden="true">
+          <img src="images/mascot.webp" alt="" width="900" height="688">
+        </div>
       </div>
     </section>
 
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Double shot, always</span><span>Colombian coffee</span><span>Pandebono fresh daily</span><span>Pickup &amp; delivery</span><span>Made in Medellín</span><span>Hoboken</span>
+        <span>Double shot, always</span><span>Colombian coffee</span><span>Pandebono fresh daily</span><span>Pickup &amp; delivery</span><span>Made in Medellín</span><span>Hoboken</span>
+      </div>
+    </div>
+
     <section id="menu" class="section">
       <div class="container">
-        <h2 class="reveal">Our Menu</h2>
-        <div class="tabs" id="menu-tabs" role="tablist" aria-label="Menu categories"></div>
-        <div class="grid" id="product-grid"></div>
+        <div class="section-head reveal">
+          <h2>The Menu</h2>
+          <p>Tap <strong>+</strong> to add to your order.</p>
+        </div>
+        <nav class="tabs" id="menu-tabs" aria-label="Menu sections"></nav>
+        <div id="menu-list"></div>
         <div class="menu-cta center">
           <a href="#menu" class="btn order-link">Order pickup or delivery</a>
         </div>
       </div>
     </section>
 
-    <section id="order" class="section section-alt">
+    <section id="order" class="section section-dark">
       <div class="container reveal">
         <h2 class="center">Pickup &amp; Delivery</h2>
         <p class="center lead">Order ahead and skip the line, or let us bring it to you.</p>
@@ -67,9 +84,14 @@
     </section>
 
     <section id="about" class="section">
-      <div class="container narrow reveal">
-        <h2>About Us</h2>
-        <p data-field="about"></p>
+      <div class="container two-col reveal">
+        <div>
+          <h2>Our Story</h2>
+          <p class="about-text" data-field="about"></p>
+        </div>
+        <div class="about-art">
+          <img src="images/medellin.webp" alt="Made in Medellín" width="900" height="205" loading="lazy">
+        </div>
       </div>
     </section>
 
@@ -80,27 +102,30 @@
           <p class="address" data-field="address"></p>
           <h3>Opening Hours</h3>
           <table class="hours" id="hours"></table>
+          <div class="contact-links" id="contact-links"></div>
         </div>
         <div class="map-wrap">
-          <iframe id="map" title="Store location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe id="map" title="Map showing Cafe Cartel" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <section id="contact" class="section section-red">
       <div class="container narrow center reveal">
-        <h2>Get in Touch</h2>
-        <p>Questions, catering or large orders? Call, email or message us.</p>
-        <div class="contact-links" id="contact-links"></div>
+        <h2>Catering</h2>
+        <p>Coffee, empanadas and pastries for your office, party or event.</p>
+        <div class="contact-links" id="catering-links"></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>&copy; <span id="year"></span> <span data-field="name"></span></p>
+      <img src="images/logo.webp" alt="Cafe Cartel" class="footer-logo" width="640" height="524" loading="lazy">
+      <p>&copy; <span id="year"></span> <span data-field="name"></span> · <span data-field="address"></span></p>
       <div class="social" id="social"></div>
     </div>
+    <div class="flag-stripe" aria-hidden="true"></div>
   </footer>
 
   <script src="content.js"></script>
