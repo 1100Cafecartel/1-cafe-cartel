@@ -142,8 +142,12 @@ h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; f
 
 /* About */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-.about-text { font-size: 1.1rem; }
-.about-art img { width: 100%; max-width: 480px; margin: 0 auto; }
+.about-text { font-size: 1.1rem; color: #d9d1ca; }
+.medellin { width: 100%; max-width: 360px; margin-top: 28px; }
+.about-art img { width: 100%; max-width: 420px; margin: 0 auto; }
+.section-head h2 { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.sticker { width: 170px; transform: rotate(-6deg); transition: transform .3s; }
+.sticker:hover { transform: rotate(3deg) scale(1.08); }
 
 /* Visit */
 .address { font-size: 1.15rem; font-weight: 600; }
@@ -267,6 +271,8 @@ body.drawer-lock { overflow: hidden; }
          padding: 18px 16px 22px; gap: 18px; border-bottom: 1px solid var(--line); box-shadow: 0 12px 20px rgba(0,0,0,.08); }
   .nav.open { display: flex; }
   .two-col { grid-template-columns: 1fr; gap: 32px; }
+  .sticker { width: 130px; }
+  .about-art img { max-width: 300px; }
   .section { padding: 60px 0; }
   .hero { padding: 40px 0 48px; }
   .sheet { top: auto; bottom: 0; left: 0; width: 100%; max-height: 90vh; border-radius: 18px 18px 0 0; transform: translateY(100%); }
