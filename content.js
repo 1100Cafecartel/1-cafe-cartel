@@ -37,9 +37,8 @@ window.STORE = {
 
   // Opening hours, shown in this order
   hours: [
-    ["Monday – Friday", "7:00 AM – 6:00 PM"],
-    ["Saturday", "8:00 AM – 6:00 PM"],
-    ["Sunday", "8:00 AM – 3:00 PM"],
+    ["Monday – Wednesday", "7:00 AM – 4:00 PM"],
+    ["Thursday – Sunday", "7:00 AM – 5:00 PM"],
   ],
 
   // Social links (leave "" to hide)
