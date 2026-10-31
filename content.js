@@ -21,8 +21,7 @@ window.STORE = {
   orderNote: "Pickup or delivery · Pay when you get your order",
   // If you later turn on Toast Online Ordering, paste its link here and the Order
   // buttons will go to Toast instead of the site's cart.
-  orderUrl: "",
-
+  orderUrl: "",orderUrl: "https://order.cafecartel.club/s/cafecartel",
   // Delivery zones shown in the "Pickup & Delivery" section and used at checkout.
   delivery: [
     { area: "In town",     minimum: "$10", fee: "$5" },
