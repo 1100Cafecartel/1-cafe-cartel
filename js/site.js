@@ -116,6 +116,11 @@
     if (s.phone) box.appendChild(el("a", { class: "btn", href: "tel:" + s.phone.replace(/[^\d+]/g, "") }, "Call " + s.phone));
     if (s.whatsapp) box.appendChild(el("a", { class: "btn", href: "https://wa.me/" + s.whatsapp, target: "_blank", rel: "noopener" }, "WhatsApp"));
     if (s.email) box.appendChild(el("a", { class: "btn btn-outline", href: "mailto:" + s.email + (labelEmail ? "?subject=" + encodeURIComponent("Catering inquiry") : "") }, s.email));
+    var ig = (s.social || {}).instagram;
+    if (ig && !labelEmail) {
+      var handle = "@" + ig.replace(/\/+$/, "").split("/").pop();
+      box.appendChild(el("a", { class: "btn btn-outline", href: ig, target: "_blank", rel: "noopener" }, "Instagram " + handle));
+    }
   }
   contactLinks(document.getElementById("contact-links"));
   contactLinks(document.getElementById("catering-links"), true);
