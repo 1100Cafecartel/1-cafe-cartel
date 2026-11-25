@@ -16,65 +16,47 @@
     else if (node.classList.contains("order-note")) node.hidden = true;
   });
 
-  // Menu: one block per section, one row per item
-  var list = document.getElementById("menu-list");
-  var tabs = document.getElementById("menu-tabs");
-  (s.menu || []).forEach(function (sec, si) {
-    var id = "menu-" + sec.section.toLowerCase().replace(/[^a-z]+/g, "-");
-    var block = el("section", { class: "menu-section reveal" + (sec.highlight ? " highlight" : ""), id: id });
-    var head = el("div", { class: "menu-head" });
-    head.appendChild(el("h3", {}, sec.section));
-    if (sec.note) head.appendChild(el("p", { class: "menu-note" }, sec.note));
-    block.appendChild(head);
+  var orderUrl = s.orderUrl || "#";
+  document.querySelectorAll(".order-link").forEach(function (a) { a.href = orderUrl; });
 
-    var ul = el("ul", { class: "menu-items" });
-    sec.items.forEach(function (item, ii) {
-      var li = el("li", { class: "menu-item" });
-      if (item.image) li.appendChild(el("img", { src: item.image, alt: "", loading: "lazy", class: "menu-thumb" }));
-      var info = el("div", { class: "menu-info" });
-      info.appendChild(el("span", { class: "menu-name" }, item.name));
-      var sub = item.desc || (item.choices ? item.choices.join(" · ") : "");
-      if (sub) info.appendChild(el("span", { class: "menu-desc" }, sub));
-      li.appendChild(info);
-
-      var price = el("span", { class: "menu-price" });
-      if (item.sizes) {
-        var names = Object.keys(item.sizes);
-        price.textContent = names.slice(0, 2).map(function (n) { return money(item.sizes[n]); }).join(" / ");
-        price.title = names.map(function (n) { return n + " " + money(item.sizes[n]); }).join(" · ");
-        if (names.length > 2) info.appendChild(el("span", { class: "menu-desc" }, names.slice(2).map(function (n) { return n + " " + money(item.sizes[n]); }).join(" · ")));
-      } else {
-        price.textContent = money(item.price || 0);
-      }
-      li.appendChild(price);
-      li.appendChild(el("button", { class: "add-btn", type: "button", "data-section": si, "data-item": ii, "aria-label": "Add " + item.name }, "+"));
-      ul.appendChild(li);
-    });
-    block.appendChild(ul);
-    list.appendChild(block);
-
-    tabs.appendChild(el("a", { class: "tab", href: "#" + id }, sec.section));
+  // House favorites: photo cards that open the item on the order site
+  var favs = document.getElementById("favorites-list");
+  (s.favorites || []).forEach(function (f, i) {
+    var a = el("a", { class: "fav reveal", href: orderUrl + (f.id ? "#i/" + f.id : ""), style: "--i:" + i });
+    var fig = el("div", { class: "fav-img" });
+    fig.appendChild(el("img", { src: f.img, alt: f.name, loading: "lazy", width: "500", height: "500" }));
+    a.appendChild(fig);
+    var body = el("div", { class: "fav-body" });
+    var top = el("div", { class: "fav-top" });
+    top.appendChild(el("span", { class: "fav-name" }, f.name));
+    if (f.price) top.appendChild(el("span", { class: "fav-price" }, "$" + f.price));
+    body.appendChild(top);
+    if (f.desc) body.appendChild(el("span", { class: "fav-desc" }, f.desc));
+    a.appendChild(body);
+    favs.appendChild(a);
   });
 
-  // Delivery zone cards next to the Pickup card
+  // Menu sections: photo cards that open the section on the order site
+  var secs = document.getElementById("sections-list");
+  (s.sections || []).forEach(function (c, i) {
+    var a = el("a", { class: "sec reveal", href: orderUrl + "#c/" + encodeURIComponent(c.name), style: "--i:" + i });
+    a.appendChild(el("img", { src: c.img, alt: "", loading: "lazy", width: "500", height: "500" }));
+    var cap = el("div", { class: "sec-cap" });
+    cap.appendChild(el("span", { class: "sec-name" }, c.name));
+    if (c.note) cap.appendChild(el("span", { class: "sec-note" }, c.note));
+    a.appendChild(cap);
+    secs.appendChild(a);
+  });
+
+  // Pickup card + delivery cards
   var options = document.getElementById("order-options");
   (s.delivery || []).forEach(function (d) {
     var box = el("div", { class: "option" });
     box.appendChild(el("h3", {}, "Delivery · " + d.area));
-    box.appendChild(el("p", { class: "big" }, d.fee + " fee"));
-    box.appendChild(el("p", {}, d.minimum + " minimum order, plus the delivery fee."));
+    box.appendChild(el("p", { class: "big" }, d.fee));
+    box.appendChild(el("p", {}, d.minimum ? d.minimum + " minimum order." : "Delivery fee, added at checkout."));
     options.appendChild(box);
   });
-
-  // With a Toast link, Order buttons go to Toast; otherwise js/order.js runs the site's own cart
-  if (s.orderUrl) {
-    document.querySelectorAll(".order-link").forEach(function (link) {
-      link.href = s.orderUrl;
-      link.target = "_blank";
-      link.rel = "noopener";
-    });
-    document.querySelectorAll(".add-btn").forEach(function (b) { b.remove(); });
-  }
 
   var hours = document.getElementById("hours");
   (s.hours || []).forEach(function (h) {
@@ -158,7 +140,10 @@
 
   // Header shadow once the page is scrolled
   var header = document.querySelector(".site-header");
-  function onScroll() { header.classList.toggle("scrolled", window.scrollY > 10); }
+  function onScroll() {
+    header.classList.toggle("scrolled", window.scrollY > 10);
+    document.body.classList.toggle("past-hero", window.scrollY > 520);
+  }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
@@ -185,13 +170,9 @@
         var link = map[entry.target.id];
         if (!link) return;
         link.classList.toggle("active", entry.isIntersecting);
-        if (entry.isIntersecting && link.classList.contains("tab")) {
-          tabs.scrollTo({ left: link.offsetLeft - 16, behavior: "smooth" });
-        }
       });
     }, { rootMargin: margin });
     targets.forEach(function (t) { io.observe(t); });
   }
   spy(nav.querySelectorAll('a[href^="#"]:not(.btn)'), document.querySelectorAll("main > section[id]"), "-45% 0px -50% 0px");
-  spy(tabs.querySelectorAll(".tab"), document.querySelectorAll(".menu-section"), "-30% 0px -65% 0px");
 })();

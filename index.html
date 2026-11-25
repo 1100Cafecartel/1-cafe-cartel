@@ -4,7 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cafe Cartel · Colombian Coffee in Hoboken</title>
-  <meta name="description" content="Cafe Cartel: Colombian coffee, bakery and kitchen in Hoboken, NJ. Order online for pickup or delivery.">
+  <meta name="description" content="Cafe Cartel: Colombian coffee, bakery and kitchen in Hoboken, NJ. Order ahead for pickup and earn Sundays Off rewards.">
+  <meta property="og:title" content="Cafe Cartel · Colombian Coffee in Hoboken">
+  <meta property="og:description" content="Double-shot Colombian coffee, pandebono and empanadas. Order ahead and skip the line.">
+  <meta property="og:image" content="https://cafecartel.club/images/menu/cafe-cartagena.jpg">
+  <meta name="theme-color" content="#161210">
   <link rel="icon" href="images/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,11 +22,12 @@
       <a href="#top" class="logo"><img src="images/logo.webp" alt="Cafe Cartel Hoboken" width="640" height="524"></a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
       <nav class="nav">
+        <a href="#favorites">Favorites</a>
         <a href="#menu">Menu</a>
-        <a href="#order">Delivery</a>
+        <a href="#rewards">Rewards</a>
         <a href="#visit">Visit</a>
         <a href="#about">Our Story</a>
-        <a href="#menu" class="btn btn-small order-link">Order now</a>
+        <a href="#" class="btn btn-small order-link">Order ahead</a>
       </nav>
     </div>
   </header>
@@ -36,7 +41,7 @@
           <h1>Coffee with a <span class="red">reputation.</span></h1>
           <p class="tagline" data-field="tagline"></p>
           <div class="hero-actions">
-            <a href="#menu" class="btn order-link">Order pickup or delivery</a>
+            <a href="#" class="btn btn-big order-link">Order ahead</a>
             <a href="#menu" class="btn btn-ghost">See the menu</a>
           </div>
           <p class="order-note" data-field="orderNote"></p>
@@ -49,46 +54,75 @@
 
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
-        <span>Double shot, always</span><span>Colombian coffee</span><span>Pandebono fresh daily</span><span>Pickup &amp; delivery</span><span>Made in Medellín</span><span>Hoboken</span>
-        <span>Double shot, always</span><span>Colombian coffee</span><span>Pandebono fresh daily</span><span>Pickup &amp; delivery</span><span>Made in Medellín</span><span>Hoboken</span>
+        <span>Double shot, always</span><span>Colombian coffee</span><span>Pandebono fresh daily</span><span>Order ahead</span><span>Sundays Off rewards</span><span>Hoboken</span>
+        <span>Double shot, always</span><span>Colombian coffee</span><span>Pandebono fresh daily</span><span>Order ahead</span><span>Sundays Off rewards</span><span>Hoboken</span>
       </div>
     </div>
 
-    <section id="menu" class="section">
+    <section id="favorites" class="section">
       <div class="container">
         <div class="section-head reveal">
-          <h2>The Menu <img class="sticker" src="images/muy-caliente.webp" alt="Caution: muy caliente!" width="520" height="151"></h2>
-          <p>Tap <strong>+</strong> to add to your order.</p>
+          <h2>House favorites <img class="sticker" src="images/muy-caliente.webp" alt="Caution: muy caliente!" width="520" height="151"></h2>
+          <p>Tap one to order it.</p>
         </div>
-        <nav class="tabs" id="menu-tabs" aria-label="Menu sections"></nav>
-        <div id="menu-list"></div>
+        <div class="fav-grid" id="favorites-list"></div>
+      </div>
+    </section>
+
+    <section id="menu" class="section section-alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>The menu</h2>
+          <p>Pick a section to see everything, with prices.</p>
+        </div>
+        <div class="sec-grid" id="sections-list"></div>
         <div class="menu-cta center">
-          <a href="#menu" class="btn order-link">Order pickup or delivery</a>
+          <a href="#" class="btn btn-big order-link">See the full menu &amp; order</a>
         </div>
+      </div>
+    </section>
+
+    <section id="rewards" class="section section-yellow">
+      <div class="container rewards reveal">
+        <div>
+          <p class="kicker kicker-ink">Rewards</p>
+          <h2 data-field="rewardsName"></h2>
+          <p class="rewards-text" data-field="rewardsText"></p>
+          <a href="#" class="btn btn-ink order-link">Start earning</a>
+        </div>
+        <ol class="punch" aria-label="6 drinks earn the 7th free">
+          <li><span>1</span></li><li><span>2</span></li><li><span>3</span></li>
+          <li><span>4</span></li><li><span>5</span></li><li><span>6</span></li>
+          <li class="free"><span>Free</span></li>
+        </ol>
       </div>
     </section>
 
     <section id="order" class="section section-dark">
       <div class="container reveal">
-        <h2 class="center">Pickup &amp; Delivery</h2>
-        <p class="center lead">Order ahead and skip the line, or let us bring it to you.</p>
+        <h2 class="center">Skip the line</h2>
+        <ol class="steps">
+          <li><b>Order online</b><span>Pick your drinks and food, and choose a pickup time.</span></li>
+          <li><b>Pay your way</b><span>Card or Apple Pay online, or pay at the counter.</span></li>
+          <li><b>Grab &amp; go</b><span>It's made fresh and waiting with your name on it.</span></li>
+        </ol>
         <div class="options" id="order-options">
           <div class="option">
             <h3>Pickup</h3>
             <p class="big">Free</p>
-            <p>Order here and grab it at the counter. No minimum.</p>
+            <p>Ready at the counter. No minimum.</p>
           </div>
         </div>
-        <div class="center"><a href="#menu" class="btn order-link">Start your order</a></div>
+        <div class="center"><a href="#" class="btn btn-big order-link">Start your order</a></div>
       </div>
     </section>
 
     <section id="visit" class="section section-alt">
       <div class="container two-col reveal">
         <div>
-          <h2>Visit Us</h2>
+          <h2>Visit us</h2>
           <p class="address" data-field="address"></p>
-          <h3>Opening Hours</h3>
+          <h3>Opening hours</h3>
           <table class="hours" id="hours"></table>
           <div class="contact-links" id="contact-links"></div>
         </div>
@@ -101,7 +135,7 @@
     <section id="about" class="section section-dark">
       <div class="container two-col reveal">
         <div>
-          <h2>Our Story</h2>
+          <h2>Our story</h2>
           <p class="about-text" data-field="about"></p>
           <img class="medellin" src="images/medellin-white.webp" alt="Made in Medellín" width="900" height="203" loading="lazy">
         </div>
@@ -129,8 +163,9 @@
     <div class="flag-stripe" aria-hidden="true"></div>
   </footer>
 
+  <a href="#" class="order-fab order-link" aria-label="Order ahead">Order ahead</a>
+
   <script src="content.js"></script>
   <script src="js/site.js"></script>
-  <script src="js/order.js"></script>
 </body>
 </html>

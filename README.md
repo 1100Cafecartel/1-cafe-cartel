@@ -4,22 +4,12 @@ A simple, fast showcase website for Cafe Cartel ([cafecartel.club](https://cafec
 
 ## Changing the content
 
-Almost everything is in **`content.js`**: café name, tagline, story, phone, email, address, hours, social links, delivery zones and **the menu**.
+Almost everything is in **`content.js`**: café name, tagline, story, phone, email, address, hours, social links, the rewards text and the pickup/delivery cards.
 
-**Menu items** live under `menu:`, grouped by section (Coffee, Bakery, ...). Each item is one line:
-
-```js
-{ name: "Latte", sizes: { Reg: 4.85, Lg: 5.85 } },          // two sizes
-{ name: "Espresso", price: 3.35 },                            // one price
-{ name: "Muffin", price: 2.90, choices: ["Banana", "Mocha"] }, // customer picks one
-{ name: "Pita Paisa", price: 8.99, desc: "Colombian chorizo, chimichurri, provolone" },
-```
-
-- To change a price, edit the number. To remove an item, delete its line. To add one, copy a line and edit it.
-- Add `image: "images/latte.jpg"` to an item to show a photo next to it.
-- Drink add-ons (iced, oat milk, flavors, extra shot) are under `extras:` and apply to sections marked `extras: true`.
+- **The full menu and prices live on the ordering site** (order.cafecartel.club, edited in *Menu & hours*). This page only shows highlights and sends people there, so prices are never out of date here.
+- **House favorites** (`favorites:`): photo cards. Each has a name, price, short description, photo (`images/menu/...jpg`) and the item's number on the order site (`id`). Open the item on the order site; the number is at the end of the address, e.g. `#i/22`.
+- **Menu sections** (`sections:`): one photo card per section. The `name` must match the section name in Menu & hours.
 - **Colors:** change the values at the top of `css/style.css` (`--red`, `--yellow`, `--blue`, `--ink`).
-- **Online orders** are sent to `orderEmail`. Add the café cell number to `orderTextNumber` to let customers send orders by text.
 
 You can edit the files directly on github.com (open the file, click the pencil, then **Commit changes**). You can also edit them on your computer and push. The live site updates about a minute after each commit.
 
