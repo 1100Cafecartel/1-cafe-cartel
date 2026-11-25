@@ -70,7 +70,7 @@ window.STORE = {
 
   // Social links (leave "" to hide)
   social: {
-    instagram: "",
+    instagram: "https://www.instagram.com/cafecartel/",
     facebook: "",
     tiktok: "",
   },
